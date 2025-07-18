@@ -1,0 +1,257 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 8,
+    "passes": 8,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-18T02:22:40.490Z",
+    "end": "2025-07-18T02:22:43.644Z",
+    "duration": 3154,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "c22c323d-cf21-446f-aa2b-a8bd9952da50",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "b717cc72-0ef6-4f98-8688-2d23af5c35ad",
+          "title": "CRUD Users API - Positive Cases",
+          "fullFile": "C:\\Users\\jvnge\\OneDrive\\Documents\\Github\\TechnicalTest\\apiTest.js",
+          "file": "\\apiTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create a new user",
+              "fullTitle": "CRUD Users API - Positive Cases should create a new user",
+              "timedOut": false,
+              "duration": 494,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let randomValue = Math.floor(Math.random() * 999999999) + 100000000;\nlet newUser = {\n    name: 'New User',\n    email: `newuser${randomValue}@gmail.com`,\n    gender: 'female',\n    status: 'inactive'\n};\ntry {\n    const response = await axios.post(apiUrl, newUser, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n    expect(response.status).to.equal(201); \n    expect(response.data).to.have.property('id'); \n    createdUserId = response.data.id; \n    expect(response.data.name).to.equal(newUser.name); \n    expect(response.data.email).to.equal(newUser.email); \n    console.log('Created User:', response.data);\n} catch (error) {\n    console.error('Create User Test Failed:', error.message);\n    throw error;\n}",
+              "err": {},
+              "uuid": "3d76b75d-ed03-4516-9549-9c16365a9af3",
+              "parentUUID": "b717cc72-0ef6-4f98-8688-2d23af5c35ad",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should retrieve users list",
+              "fullTitle": "CRUD Users API - Positive Cases should retrieve users list",
+              "timedOut": false,
+              "duration": 392,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "try {\n    const response = await axios.get(apiUrl, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n    expect(response.status).to.equal(200);\n    expect(response.data).to.be.an('array');\n    console.log('Users Retrieved:', response.data);\n} catch (error) {\n    console.error('Read Users Test Failed:', error.message);\n    throw error;\n}",
+              "err": {},
+              "uuid": "4dc11bd3-59c3-41d4-87e5-019164b0636d",
+              "parentUUID": "b717cc72-0ef6-4f98-8688-2d23af5c35ad",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should retrieve user by ID",
+              "fullTitle": "CRUD Users API - Positive Cases should retrieve user by ID",
+              "timedOut": false,
+              "duration": 375,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "try {\n    const response = await axios.get(`${apiUrl}/${createdUserId}`, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n    expect(response.status).to.equal(200);\n    expect(response.data).to.be.an('object');\n    console.log('ID User Data shown:', response.data);\n} catch (error) {\n    console.error('Read User Test Failed:', error.message);\n    throw error;\n}",
+              "err": {},
+              "uuid": "ad774367-4b3e-4853-84e7-958b63323df4",
+              "parentUUID": "b717cc72-0ef6-4f98-8688-2d23af5c35ad",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update the user information",
+              "fullTitle": "CRUD Users API - Positive Cases should update the user information",
+              "timedOut": false,
+              "duration": 372,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (!createdUserId) throw new Error('User ID not available for update');\nlet randomValue = Math.floor(Math.random() * 999999999) + 100000000;\nconst updatedUser = {\n    name: 'Updated User',\n    email: `updateduser${randomValue}@example.com`,\n    gender: 'male',\n    status: 'inactive'\n};\ntry {\n    const response = await axios.put(`${apiUrl}/${createdUserId}`, updatedUser, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n    expect(response.status).to.equal(200); \n    expect(response.data.name).to.equal(updatedUser.name); \n    expect(response.data.email).to.equal(updatedUser.email); \n    console.log('Updated User:', response.data);\n} catch (error) {\n    console.error('Update User Test Failed:', error.message);\n    throw error;\n}",
+              "err": {},
+              "uuid": "b0bf66ce-0eb8-49d6-b30b-d664cdc120a4",
+              "parentUUID": "b717cc72-0ef6-4f98-8688-2d23af5c35ad",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete the created user",
+              "fullTitle": "CRUD Users API - Positive Cases should delete the created user",
+              "timedOut": false,
+              "duration": 460,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (!createdUserId) throw new Error('User ID not available for delete');\ntry {\n    const response = await axios.delete(`${apiUrl}/${createdUserId}`, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n    expect(response.status).to.equal(204);\n} catch (error) {\n    console.error('Delete User Test Failed:', error.message);\n    throw error;\n}",
+              "err": {},
+              "uuid": "c6a667be-462c-446c-a2b9-692e83a17c4a",
+              "parentUUID": "b717cc72-0ef6-4f98-8688-2d23af5c35ad",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3d76b75d-ed03-4516-9549-9c16365a9af3",
+            "4dc11bd3-59c3-41d4-87e5-019164b0636d",
+            "ad774367-4b3e-4853-84e7-958b63323df4",
+            "b0bf66ce-0eb8-49d6-b30b-d664cdc120a4",
+            "c6a667be-462c-446c-a2b9-692e83a17c4a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2093,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "b9f69bb3-04a0-438d-ae2a-f6d7e856e85f",
+          "title": "User API - Negative Test Cases with Axios",
+          "fullFile": "C:\\Users\\jvnge\\OneDrive\\Documents\\Github\\TechnicalTest\\apiTest.js",
+          "file": "\\apiTest.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should return 404 for trying to update a non-existent user",
+              "fullTitle": "User API - Negative Test Cases with Axios should return 404 for trying to update a non-existent user",
+              "timedOut": false,
+              "duration": 309,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const nonExistentUserId = 999999;\nconst updatedUserData = {\n    name: 'Updated User',\n    email: 'updated@example.com',\n    gender: 'female',\n    status: 'active',\n};\ntry {\n    const res = await axios.put(`${apiUrl}/${nonExistentUserId}`, updatedUserData, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n} catch (err) {\n    expect(err.response.status).to.equal(404); \n    expect(err.response.data).to.have.property('message').that.includes('Resource not found');\n}",
+              "err": {},
+              "uuid": "22c483af-c862-4474-a939-74319de3370b",
+              "parentUUID": "b9f69bb3-04a0-438d-ae2a-f6d7e856e85f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return 404 for trying to delete a non-existent user",
+              "fullTitle": "User API - Negative Test Cases with Axios should return 404 for trying to delete a non-existent user",
+              "timedOut": false,
+              "duration": 397,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const nonExistentUserId = 999999;\ntry {\n    const res = await axios.delete(`${apiUrl}/${nonExistentUserId}`, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n} catch (err) {\n    expect(err.response.status).to.equal(404); \n    expect(err.response.data).to.have.property('message').that.includes('Resource not found');\n}",
+              "err": {},
+              "uuid": "a8cbc6fa-fd0d-4533-b368-923c8c7e3613",
+              "parentUUID": "b9f69bb3-04a0-438d-ae2a-f6d7e856e85f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return 404 for trying to get a non-existent user",
+              "fullTitle": "User API - Negative Test Cases with Axios should return 404 for trying to get a non-existent user",
+              "timedOut": false,
+              "duration": 337,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const nonExistentUserId = 999999;\ntry {\n    const res = await axios.get(`${apiUrl}/${nonExistentUserId}`, {\n        headers: { 'Authorization': `Bearer ${token}` },\n    });\n} catch (err) {\n    expect(err.response.status).to.equal(404); \n    expect(err.response.data).to.have.property('message').that.includes('Resource not found');\n}",
+              "err": {},
+              "uuid": "c69780ca-25ad-4f98-86f5-47691abfb0bc",
+              "parentUUID": "b9f69bb3-04a0-438d-ae2a-f6d7e856e85f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "22c483af-c862-4474-a939-74319de3370b",
+            "a8cbc6fa-fd0d-4533-b368-923c8c7e3613",
+            "c69780ca-25ad-4f98-86f5-47691abfb0bc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1043,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": true,
+        "reportFilename": "index",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "index",
+        "quiet": "true"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
